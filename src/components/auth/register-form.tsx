@@ -27,7 +27,7 @@ export const RegisterForm = () => {
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { name: "", email: "", password: "" },
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
@@ -46,7 +46,7 @@ export const RegisterForm = () => {
     <CardWrapper
       headerLabel="Create an account"
       backButtonLabel="Already have an account?"
-      backButtonHref="/auth/register"
+      backButtonHref="/auth/login"
       showSocial>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
