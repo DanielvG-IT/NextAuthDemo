@@ -22,7 +22,7 @@ export const verifyEmail = async (token: string) => {
     return { error: "Email does not exist!" };
   }
 
-  // TODO: Uncomment this block of code to prevent users from verifying their email multiple times.
+  // TODO: EDGE CASE Uncomment this block of code to prevent users from verifying their email multiple times.
   // if (existingUser.emailVerified) {
   //   return { error: "Email already verified!" };
   // }
