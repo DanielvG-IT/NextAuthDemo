@@ -25,7 +25,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { error: "Invalid Credentials!" };
   }
 
-  // TODO Check that the password matches the stored hash.
   const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
   if (!isPasswordMatch) {
     return { error: "Invalid Credentials!" };
