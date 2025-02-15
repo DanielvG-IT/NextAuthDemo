@@ -3,7 +3,7 @@
  * These routes are not protected by authentication.
  * @type {string[]}
  */
-export const publicRoutes: string[] = ["/"];
+export const publicRoutes: string[] = ["/", "/auth/verify-email"];
 
 /**
  * An array of auth routes that are used for authentication.
