@@ -13,13 +13,6 @@ export const publicRoutes: string[] = ["/"];
 export const authRoutes: string[] = [
   "/auth/login",
   "/auth/register",
-  "/auth/forgot-password",
-  "/auth/reset-password",
-  "/auth/verify-request",
-  "/auth/verify-email",
-  "/auth/signin",
-  "/auth/signout",
-  "/auth/callback",
   "/auth/error",
 ];
 
