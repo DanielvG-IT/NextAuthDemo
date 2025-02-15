@@ -13,17 +13,19 @@ enum UserRole {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  role         UserRole          @default(USER)
-  accounts      Account[]
-  Authenticator Authenticator[]  // Optional for WebAuthn support 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String          @id @default(cuid())
+  name              String?
+  email             String          @unique
+  emailVerified     DateTime?
+  image             String?
+  password          String?
+  role              UserRole         @default(USER)
+  accounts          Account[]
+  TwoFactorEnabled  Boolean      @default(false)
+  TwoFactorConfirmation TwoFactorConfirmation?
+  Authenticator     Authenticator[]  // Optional for WebAuthn support 
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 model Account {
@@ -80,4 +82,23 @@ model PasswordResetToken {
   createdAt DateTime @default(now())
 
   @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id       String   @id @default(cuid()) 
+  userId   String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
 }
