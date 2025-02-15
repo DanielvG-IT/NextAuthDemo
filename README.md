@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auth Demo Application
+
+Welcome to the **Auth Demo Application** – a modern, feature-rich demo designed to showcase secure authentication flows and user management in a production-ready Next.js environment.
+
+## Overview
+
+This demo application illustrates:
+
+- **User Registration & Login**: Traditional email/password as well as social logins (GitHub, Google).
+- **Email Verification & Password Reset**: Secure flows to confirm user identity and manage password recovery.
+- **Protected Routes**: Middleware ensures that only authenticated users can access secure areas.
+- **Modern UI**: Responsive design powered by TailwindCSS and custom UI components.
+
+## Features
+
+- **Modern Authentication**  
+  Built on [NextAuth](src/auth.ts) with credential and social providers integration.
+
+- **Robust Security**  
+  Verification tokens and secure server actions (see [verify-email](src/actions/verify-email.ts) and [new-password](src/actions/new-password.ts)) ensure best practices in authentication.
+
+- **Database Integration**  
+  Uses [Prisma](prisma/schema.prisma) for schema management and database operations, ensuring scalability and reliability.
+
+- **Clean and Modular Codebase**  
+  Organized file structure separating actions, UI components, and server logic:
+  - Pages and layouts in [src/app](src/app/page.tsx)
+  - Authentication actions in [src/actions](src/actions/register.ts)
+  - UI components in [src/components](src/components/auth/login-form.tsx)
+
+## Project Structure
+
+- **src/app/** – Application routes and layouts.  
+  For example, the protected settings page is implemented in [src/app/(protected)/settings/page.tsx](<src/app/(protected)/settings/page.tsx>).
+
+- **src/actions/** – Server-side actions such as login, registration, password resets, and email verification.
+
+- **src/components/** – Reusable UI components built with TailwindCSS and modern React principles.
+
+- **src/lib/** – Utility libraries for database access, email sending, token generation, etc.
+
+- **prisma/** – Contains the Prisma schema and migration files.
 
 ## Getting Started
 
-First, run the development server:
+1. **Install Dependencies**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   ```sh
+   npm install
+   ```
+
+2. Configure Environment Variables
+   Create a .env file in the root directory and populate it with the necessary keys (e.g., database URL, API keys for GitHub, Google, and Resend).
+
+3. Run Migrations
+
+   ```sh
+   npx prisma migrate dev
+   ```
+
+4. Start the Development Server
+
+```sh
+   npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To build and run the project in production mode:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm run build
+npm run start
+```
 
-## Learn More
+### Continuous Integration and Continuous Deployment (CI/CD)
 
-To learn more about Next.js, take a look at the following resources:
+This project is already set up with a CI/CD pipeline to automate the deployment process. The pipeline includes steps for:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Installing dependencies
+2. Running database migrations
+3. Building the application
+4. Starting the application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+This demo is proprietary software provided under license. For full license details, please refer to the [LICENSE](LICENSE) file.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For demo requests, pricing information, or additional inquiries, please contact:
+
+[Your Contact Information]
