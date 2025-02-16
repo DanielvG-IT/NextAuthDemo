@@ -19,6 +19,7 @@ const LoginButton = ({
     router.push("/auth/login");
   };
 
+  // TODO Implement login modal!
   if (mode === "modal") {
     return <span>TODO Implement modal!</span>;
   }
