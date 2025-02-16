@@ -22,11 +22,6 @@ export const verifyEmail = async (token: string) => {
     return { error: "Email does not exist!" };
   }
 
-  // TODO: EDGE CASE Uncomment this block of code to prevent users from verifying their email multiple times.
-  // if (existingUser.emailVerified) {
-  //   return { error: "Email already verified!" };
-  // }
-
   await db.user.update({
     where: { email: existingToken.email },
     data: {
