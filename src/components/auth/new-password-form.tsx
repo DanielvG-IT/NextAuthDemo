@@ -66,6 +66,8 @@ export const NewPasswordForm = () => {
                       placeholder="********"
                       type="password"
                       disabled={isPending}
+                      autoComplete="new-password"
+                      required
                     />
                   </FormControl>
                   <FormMessage />

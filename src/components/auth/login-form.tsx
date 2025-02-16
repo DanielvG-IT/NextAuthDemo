@@ -90,6 +90,11 @@ export const LoginForm = () => {
                         {...field}
                         placeholder="123456"
                         type="text"
+                        required
+                        aria-required="true"
+                        autoComplete="one-time-code"
+                        inputMode="numeric"
+                        pattern="\d*"
                         disabled={isPending}
                       />
                     </FormControl>
@@ -111,6 +116,9 @@ export const LoginForm = () => {
                           {...field}
                           placeholder="email@example.com"
                           type="email"
+                          required
+                          aria-required="true"
+                          autoComplete="email"
                           disabled={isPending}
                         />
                       </FormControl>
@@ -129,6 +137,9 @@ export const LoginForm = () => {
                           {...field}
                           placeholder="********"
                           type="password"
+                          autoComplete="current-password"
+                          required
+                          aria-required="true"
                           disabled={isPending}
                         />
                       </FormControl>

@@ -61,6 +61,10 @@ export const ResetPasswordForm = () => {
                       {...field}
                       placeholder="email@example.com"
                       type="email"
+                      autoComplete="email"
+                      aria-label="Email"
+                      aria-required="true"
+                      aria-invalid={!!form.formState.errors.email}
                       disabled={isPending}
                     />
                   </FormControl>
