@@ -1,9 +1,10 @@
 import NextAuth from "next-auth";
-import authConfig from "./auth.config";
+import authConfig from "@/auth.config";
 import { db } from "@/lib/db";
 import { UserRole } from "@prisma/client";
 import { getUserById } from "@/data/user";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { getAccountByUserId } from "@/data/account";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -61,8 +62,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
 
       if (session.user) {
-        session.user.twoFactorEnabled = token.twoFactorEnabled as boolean;
-        // TODO Change to enum when adding Google Authenticator and WebAuthn
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+        session.user.twoFactorEnabled = token.twoFactorEnabled as boolean; // TODO Change to enum when adding Google Authenticator and WebAuthn
+        session.user.isOauth = token.isOauth as boolean;
       }
 
       return session;
@@ -78,9 +81,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         return token;
       }
 
+      const existingAccount = await getAccountByUserId(existingUser.id);
+
+      token.name = existingUser.name;
+      token.email = existingUser.email;
       token.role = existingUser.role as UserRole;
-      token.twoFactorEnabled = existingUser.TwoFactorEnabled as boolean;
-      // TODO Change to enum when adding Google Authenticator and WebAuthn
+      token.twoFactorEnabled = existingUser.TwoFactorEnabled as boolean; // TODO Change to enum when adding Google Authenticator and WebAuthn
+      token.isOauth = !!existingAccount;
 
       return token;
     },
