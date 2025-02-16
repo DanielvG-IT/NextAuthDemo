@@ -60,6 +60,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.role = token.role as UserRole;
       }
 
+      if (session.user) {
+        session.user.twoFactorEnabled = token.twoFactorEnabled as boolean;
+        // TODO Change to enum when adding Google Authenticator and WebAuthn
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -73,7 +78,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         return token;
       }
 
-      token.role = existingUser.role;
+      token.role = existingUser.role as UserRole;
+      token.twoFactorEnabled = existingUser.TwoFactorEnabled as boolean;
+      // TODO Change to enum when adding Google Authenticator and WebAuthn
+
       return token;
     },
   },

@@ -5,7 +5,7 @@ import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
 import { getVerificationTokenByEmail } from "@/data/verification-token";
 import { getPasswordResetTokenByEmail } from "@/data/password-reset-token";
 
-// TODO Add Google Authenticator support for two-factor authentication (TOTP)
+// TODO Add Google Authenticator support for two-factor authentication (TOTP) and WebAuthn support for two-factor authentication (U2F)
 
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();
