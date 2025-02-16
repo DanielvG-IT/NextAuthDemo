@@ -5,12 +5,11 @@ import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
 import { getVerificationTokenByEmail } from "@/data/verification-token";
 import { getPasswordResetTokenByEmail } from "@/data/password-reset-token";
 
-// TODO Change all of the following functions to use less expiring time
 // TODO Add Google Authenticator support for two-factor authentication (TOTP)
 
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4();
-  const expiresAt = new Date(new Date().getTime() + 3600 * 1000);
+  const expiresAt = new Date(new Date().getTime() + 5 * 60 * 1000);
 
   const existingToken = await getVerificationTokenByEmail(email);
 
