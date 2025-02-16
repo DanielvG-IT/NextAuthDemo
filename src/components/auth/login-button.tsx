@@ -2,12 +2,19 @@
 
 interface LoginButtonProps {
   children: React.ReactNode;
-  mode: "modal" | "redirect";
-  asChild: boolean;
+  mode?: "modal" | "redirect";
+  asChild?: boolean;
 }
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { LoginForm } from "@/components/auth/login-form";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const LoginButton = ({
   children,
@@ -19,9 +26,16 @@ const LoginButton = ({
     router.push("/auth/login");
   };
 
-  // TODO Implement login modal!
   if (mode === "modal") {
-    return <span>TODO Implement modal!</span>;
+    return (
+      <Dialog>
+        <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
+        <DialogContent className="p-0 w-auto bg-transparent border-none">
+          <DialogTitle className="sr-only">Login</DialogTitle>
+          <LoginForm />
+        </DialogContent>
+      </Dialog>
+    );
   }
 
   return (
