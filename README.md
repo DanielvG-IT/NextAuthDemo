@@ -1,6 +1,10 @@
 # Auth Demo Application
 
-Welcome to the **Auth Demo Application** – a modern, feature-rich demo designed to showcase secure authentication flows and user management in a production-ready Next.js environment.
+## Tips for Enhancing Your Application
+
+> ### Error Handling
+>
+> **Tip**: Implement better error logging if you are using a service like [Sentry](https://sentry.io/) to capture and log errors.
 
 ## Overview
 
