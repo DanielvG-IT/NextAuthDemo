@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
@@ -30,6 +31,7 @@ export default async function RootLayout({
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <Toaster />
           {children}
         </body>
       </html>
