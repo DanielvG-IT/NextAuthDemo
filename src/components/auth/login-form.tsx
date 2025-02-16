@@ -24,6 +24,7 @@ import {
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || undefined;
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email is already in use with another provider"
@@ -45,7 +46,7 @@ export const LoginForm = () => {
 
     // TODO BUG: After entering 2FA code, there is an error message "Something went wrong!"
     startTransition(() => {
-      login(values)
+      login(values, callbackUrl)
         .then((data) => {
           if (data?.twoFactor) {
             setShowTwoFactor(true);
