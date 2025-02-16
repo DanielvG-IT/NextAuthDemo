@@ -97,7 +97,6 @@ export const login = async (
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
   } catch (error) {
     if (error instanceof AuthError) {
@@ -108,6 +107,9 @@ export const login = async (
           return { error: "An error occurred!" };
       }
     }
-    throw error;
   }
+
+  return {
+    redirectTo: (callbackUrl as string) || (DEFAULT_LOGIN_REDIRECT as string),
+  };
 };

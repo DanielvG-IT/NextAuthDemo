@@ -11,8 +11,8 @@ import { LoginSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSuccess } from "@/components/form-success";
 import { CardWrapper } from "@/components/auth/card-wrapper";
-import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/form";
 
 export const LoginForm = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || undefined;
   const urlError =
@@ -44,13 +45,15 @@ export const LoginForm = () => {
     setError("");
     setSuccess("");
 
-    // TODO BUG: After entering 2FA code, there is an error message "Something went wrong!"
     startTransition(() => {
       login(values, callbackUrl)
         .then((data) => {
+          if (data?.redirectTo) {
+            router.push(data.redirectTo);
+          }
           if (data?.twoFactor) {
             setShowTwoFactor(true);
-            return; // Prevent error message from showing
+            return;
           }
           if (data?.error) {
             form.reset();
@@ -63,7 +66,7 @@ export const LoginForm = () => {
           }
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
           setError("Something went wrong!");
         });
     });
